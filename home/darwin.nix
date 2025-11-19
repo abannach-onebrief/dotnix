@@ -17,68 +17,37 @@
   # macOS-specific program configurations
   programs = {
     ssh = {
-      enable = true;
+      enable = false;
       addKeysToAgent = "yes";
       extraConfig = ''
         UseKeychain yes
       '';
     };
     git = {
-      userEmail = "113929542+abannachGrafana@users.noreply.github.com";
-      signing.key = "08797C39E0828DC6";
+      userEmail = "244587300+abannach-onebrief@users.noreply.github.com";
+      signing.format = "ssh";
+      signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILEFX2ZiAHE1UWQ7f3AWylMJBH+bJXQEss6hxkb+QMPG";
+      signing.signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       signing.signByDefault = true;
     };
     bash.shellAliases = {
-      rebuild = "sudo darwin-rebuild switch --flake ~/.config/dotnix#holodeck";
+      rebuild = "home-manager switch --flake ~/.config/dotnix#picard";
+      rebuildSys = "sudo darwin-rebuild switch --flake ~/.config/dotnix#holodeck";
 
       # Work aliases
-      sso-gcloud = "$HOME/code/repos/deployment_tools/scripts/sso/gcloud.sh reset";
-      sso-aws = "$HOME/code/repos/deployment_tools/scripts/sso/aws.sh reset";
-      sso-all = "sso-gcloud && sso-aws";
-      # GCOM scripts
-      gcom-dev = "$DTOOLS_SCRIPTS/gcom/gcom-dev";
-      gcom-ops = "$DTOOLS_SCRIPTS/gcom/gcom-ops";
-      gcom = "$DTOOLS_SCRIPTS/gcom/gcom";
-      add-myself-to-org = "$DTOOLS_SCRIPTS/gcom/add-myself-to-org";
-      remove-myself-from-org = "$DTOOLS_SCRIPTS/gcom/remove-myself-from-org";
-      cleanup-my-orgs = "$DTOOLS_SCRIPTS/gcom/cleanup-my-orgs";
-      # Vault scripts
-      vault-get = "$DTOOLS_SCRIPTS/vault/vault-get";
-      vault-put = "$DTOOLS_SCRIPTS/vault/vault-put";
-      vault-patch = "$DTOOLS_SCRIPTS/vault/vault-patch";
-      vault-list = "$DTOOLS_SCRIPTS/vault/vault-list";
-      vault-token = "$DTOOLS_SCRIPTS/vault/vault-token";
-      vault-shell = "$DTOOLS_SCRIPTS/vault/vault-shell";
     };
     zsh.initContent = ''
       bindkey "^[[3~" delete-char
     '';
     zsh.shellAliases = {
-      rebuild = "sudo darwin-rebuild switch --flake ~/.config/dotnix#holodeck";
+      rebuild = "home-manager switch --flake ~/.config/dotnix#picard";
+      rebuildSys = "sudo darwin-rebuild switch --flake ~/.config/dotnix#holodeck";
 
       # Work aliases
-      sso-gcloud = "$HOME/code/repos/deployment_tools/scripts/sso/gcloud.sh reset";
-      sso-aws = "$HOME/code/repos/deployment_tools/scripts/sso/aws.sh reset";
-      sso-az = "$HOME/code/repos/deployment_tools/scripts/sso/az.sh reset";
-      sso-all = "sso-gcloud && sso-aws && sso-az";
-      # GCOM scripts
-      gcom-dev = "$DTOOLS_SCRIPTS/gcom/gcom-dev";
-      gcom-ops = "$DTOOLS_SCRIPTS/gcom/gcom-ops";
-      gcom = "$DTOOLS_SCRIPTS/gcom/gcom";
-      add-myself-to-org = "$DTOOLS_SCRIPTS/gcom/add-myself-to-org";
-      remove-myself-from-org = "$DTOOLS_SCRIPTS/gcom/remove-myself-from-org";
-      cleanup-my-orgs = "$DTOOLS_SCRIPTS/gcom/cleanup-my-orgs";
-      # Vault scripts
-      vault-get = "$DTOOLS_SCRIPTS/vault/vault-get";
-      vault-put = "$DTOOLS_SCRIPTS/vault/vault-put";
-      vault-patch = "$DTOOLS_SCRIPTS/vault/vault-patch";
-      vault-list = "$DTOOLS_SCRIPTS/vault/vault-list";
-      vault-token = "$DTOOLS_SCRIPTS/vault/vault-token";
-      vault-shell = "$DTOOLS_SCRIPTS/vault/vault-shell";
     };
     zsh.sessionVariables = {
-      GRAFANA_TEAM = "adaptive-telemetry";
-      DTOOLS_SCRIPTS = "$HOME/code/repos/deployment_tools/scripts";
+        NODE_EXTRA_CA_CERTS = "$HOME/.certs/zscaler_cert.pem";
+        CURL_CA_BUNDLE = "$HOME/.certs/zscaler_cert.pem";
     };
   };
 

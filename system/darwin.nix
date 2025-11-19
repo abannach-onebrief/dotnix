@@ -37,17 +37,17 @@
       "nvm"
 
       # Docker container runtimes (CLI tools managed by nixpkgs in shared.nix)
-      "colima" # Lightweight Docker runtime alternative
+#      "colima" # Lightweight Docker runtime alternative
     ];
 
     # Casks (GUI applications)
     casks = [
       # Add GUI applications here
-      "1password"
+#      "1password"
       "kap"
       "alt-tab"
       # Docker container runtimes
-      "orbstack" # Native macOS Docker Desktop alternative with GUI
+#      "orbstack" # Native macOS Docker Desktop alternative with GUI
     ];
 
     # Mac App Store apps
