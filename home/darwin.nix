@@ -46,8 +46,8 @@
       # Work aliases
     };
     zsh.sessionVariables = {
-        NODE_EXTRA_CA_CERTS = "$HOME/.certs/zscaler_cert.pem";
-        CURL_CA_BUNDLE = "$HOME/.certs/zscaler_cert.pem";
+      NODE_EXTRA_CA_CERTS = "$HOME/.certs/zscaler_cert.pem";
+      CURL_CA_BUNDLE = "$HOME/.certs/zscaler_cert.pem";
     };
   };
 

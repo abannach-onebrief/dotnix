@@ -3,12 +3,26 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  # Common eza flags
+  ezaFlags = "--icons=auto --classify=auto --color=auto";
+
+  # Common shell aliases shared between bash and zsh
+  commonShellAliases = {
+    ll = "eza ${ezaFlags} -aal";
+    la = "eza ${ezaFlags} -aa";
+    ls = "eza ${ezaFlags}";
+    tree = "eza ${ezaFlags} -I '.git' -a --tree";
+    grep = "grep --color=auto";
+    initYarn = "corepack enable && corepack install --global yarn@latest";
+  };
+in {
   # Shared packages across all platforms
   home.packages = with pkgs; [
     # Shell configuration
 
     # Nerd Fonts
+    nerd-fonts.hack
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     nerd-fonts.ubuntu
@@ -36,6 +50,7 @@
       ]
     ))
     azure-cli
+    awscli2
 
     # Version control
     gh # GitHub CLI
@@ -111,12 +126,7 @@
 
     bash = {
       enable = true;
-      shellAliases = {
-        ll = "eza -alF";
-        la = "eza -A";
-        l = "eza -CF";
-        grep = "grep --color=auto";
-      };
+      shellAliases = commonShellAliases;
       sessionVariables = {
         GOPROXY = "http://localhost:3100,direct";
       };
@@ -132,13 +142,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases = {
-        ll = "eza -alF";
-        la = "eza -A";
-        l = "eza -CF";
-        grep = "grep --color=auto";
-        initYarn = "corepack enable && corepack install --global yarn@latest";
-      };
+      shellAliases = commonShellAliases;
       sessionVariables = {
         GOPROXY = "http://localhost:3100,direct";
       };
