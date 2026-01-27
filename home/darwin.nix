@@ -58,6 +58,10 @@
   home.sessionVariables = {
     # Add macOS-specific variables
   };
+  home.sessionPath = [
+    # Add macOS-specific PATH entries
+    "$HOME/.local/bin"
+  ];
 
   # User information
   home = {
