@@ -103,7 +103,7 @@ in {
 
       extraConfig = {
         core = {
-          excludesFile = "$HOME/.gitignore_global";
+          excludesFile = "${config.home.homeDirectory}/.gitignore_global";
         };
         init = {
           defaultBranch = "main";
