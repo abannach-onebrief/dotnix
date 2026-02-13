@@ -34,6 +34,8 @@ in {
     curl
     posting
 
+    mise
+
     # Docker stuff
     docker
     docker-compose
@@ -100,6 +102,9 @@ in {
       signing.key = lib.mkDefault "F46A524D943277BD";
 
       extraConfig = {
+        core = {
+          excludesFile = "$HOME/.gitignore_global";
+        };
         init = {
           defaultBranch = "main";
         };
@@ -151,6 +156,9 @@ in {
         custom = "${config.home.homeDirectory}/.oh-my-zsh/custom";
         plugins = [
           "brew"
+          "docker"
+          "docker-compose"
+          "kubectx"
           "git"
           "kubectl"
           "debian"
@@ -219,6 +227,21 @@ in {
     volumes:
       athens_storage:
         driver: local
+  '';
+
+  home.file.".gitignore_global".text = ''
+    # Global gitignore patterns
+    .DS_Store
+    .idea/
+    .vscode/
+    node_modules/
+    dist/
+    build/
+    target/
+    *.log
+    lefthook-local.yml
+    CLAUDE.local.md
+    settings.local.json
   '';
 
   # Home Manager configuration

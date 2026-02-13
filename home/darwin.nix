@@ -48,6 +48,8 @@
     zsh.sessionVariables = {
       NODE_EXTRA_CA_CERTS = "$HOME/.certs/zscaler_cert.pem";
       CURL_CA_BUNDLE = "$HOME/.certs/zscaler_cert.pem";
+      CARGO_HTTP_CAINFO = "$HOME/.certs/zscaler_cert.pem";
+      CLAUDE_CODE_TMPDIR = "/tmp/claude";
     };
   };
 
@@ -58,10 +60,15 @@
   home.sessionVariables = {
     # Add macOS-specific variables
   };
+
   home.sessionPath = [
     # Add macOS-specific PATH entries
     "$HOME/.local/bin"
   ];
+
+  home.file.".wgetrc".text = ''
+    ca_certificate=/Users/bannach/.certs/zscaler_cert.pem
+  '';
 
   # User information
   home = {
