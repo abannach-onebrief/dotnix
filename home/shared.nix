@@ -17,6 +17,10 @@
     initYarn = "corepack enable && corepack install --global yarn@latest";
   };
 in {
+  imports = [
+    ../modules/neovim.nix
+  ];
+
   # Shared packages across all platforms
   home.packages = with pkgs; [
     # Shell configuration
@@ -72,7 +76,6 @@ in {
     mage
     htop
     neofetch
-    neovim
     openssh
     pay-respects
     ripgrep
