@@ -97,14 +97,14 @@ in {
     git = {
       enable = true;
       # Configure git settings here
-      userName = lib.mkDefault "Adam Bannach";
-      userEmail = lib.mkDefault "4845159+TraumaER@users.noreply.github.com";
+      settings.user.name = lib.mkDefault "Adam Bannach";
+      settings.user.email = lib.mkDefault "4845159+TraumaER@users.noreply.github.com";
 
       signing.format = lib.mkDefault "openpgp";
       signing.signByDefault = lib.mkDefault true;
       signing.key = lib.mkDefault "F46A524D943277BD";
 
-      extraConfig = {
+      settings = {
         core = {
           excludesFile = "${config.home.homeDirectory}/.gitignore_global";
         };
@@ -117,7 +117,7 @@ in {
           };
         };
       };
-      aliases = {
+      settings.alias = {
         # https://fortes.com/2022/make-git-better-with-fzf/
         addm = "!git ls-files --deleted --modified --other --exclude-standard | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r git add";
         addmp = "!git ls-files --deleted --modified --exclude-standard | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r -o git add -p";

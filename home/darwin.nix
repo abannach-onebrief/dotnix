@@ -16,15 +16,18 @@
 
   # macOS-specific program configurations
   programs = {
+    # SSH is managed by 1Password's ssh-agent, so this is disabled.
     ssh = {
       enable = false;
-      addKeysToAgent = "yes";
-      extraConfig = ''
-        UseKeychain yes
-      '';
+      matchBlocks."*" = {
+        addKeysToAgent = "yes";
+        extraOptions = {
+          UseKeychain = "yes";
+        };
+      };
     };
     git = {
-      userEmail = "244587300+abannach-onebrief@users.noreply.github.com";
+      settings.user.email = "244587300+abannach-onebrief@users.noreply.github.com";
       signing.format = "ssh";
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILEFX2ZiAHE1UWQ7f3AWylMJBH+bJXQEss6hxkb+QMPG";
       signing.signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
