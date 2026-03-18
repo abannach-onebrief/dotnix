@@ -37,8 +37,8 @@ in {
     bat
     curl
     posting
-
     mise
+    bun
 
     # Docker stuff
     docker
@@ -75,7 +75,7 @@ in {
     golangci-lint
     mage
     htop
-    neofetch
+    fastfetch
     openssh
     pay-respects
     ripgrep
