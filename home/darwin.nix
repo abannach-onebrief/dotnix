@@ -27,7 +27,9 @@
       };
     };
     git = {
-      settings.user.email = "244587300+abannach-onebrief@users.noreply.github.com";
+      settings = {
+        user.email = "244587300+abannach-onebrief@users.noreply.github.com";
+      };
       signing.format = "ssh";
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILEFX2ZiAHE1UWQ7f3AWylMJBH+bJXQEss6hxkb+QMPG";
       signing.signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
