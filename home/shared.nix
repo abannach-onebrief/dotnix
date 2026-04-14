@@ -15,6 +15,8 @@
     tree = "eza ${ezaFlags} -I '.git' -a --tree";
     grep = "grep --color=auto";
     initYarn = "corepack enable && corepack install --global yarn@latest";
+    sandbox-claude = "$HOME/code/aits/bin/claude --dangerously-skip-permissions";
+    sandbox-codex="$HOME/code/aits/bin/codex";
   };
 in {
   imports = [
