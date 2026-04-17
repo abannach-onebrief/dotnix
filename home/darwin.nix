@@ -55,6 +55,7 @@
       CURL_CA_BUNDLE = "$HOME/.certs/zscaler_cert.pem";
       CARGO_HTTP_CAINFO = "$HOME/.certs/zscaler_cert.pem";
       CLAUDE_CODE_TMPDIR = "/tmp/claude";
+      SANDBOX_INSTALL_SKIP_RC = 1;
     };
   };
 
