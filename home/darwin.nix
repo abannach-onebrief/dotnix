@@ -3,7 +3,10 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  allowedSigners = ./git-allowed-signers;
+  allowedSignersPath = "${config.xdg.configHome}/git/allowed_signers";
+in {
   imports = [
     ./shared.nix
     ../modules/homebrew.nix
@@ -29,10 +32,11 @@
     git = {
       settings = {
         user.email = "244587300+abannach-onebrief@users.noreply.github.com";
+        gpg.ssh.allowedSignersFile = allowedSignersPath;
       };
       signing.format = "ssh";
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILEFX2ZiAHE1UWQ7f3AWylMJBH+bJXQEss6hxkb+QMPG";
-      signing.signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      signing.signer = "ssh-keygen";
       signing.signByDefault = true;
     };
     bash.shellAliases = {
@@ -55,7 +59,11 @@
       CURL_CA_BUNDLE = "$HOME/.certs/zscaler_cert.pem";
       CARGO_HTTP_CAINFO = "$HOME/.certs/zscaler_cert.pem";
       CLAUDE_CODE_TMPDIR = "/tmp/claude";
+      MVM_NO_CHROME = 1;
       SANDBOX_INSTALL_SKIP_RC = 1;
+      SANDBOX_INSTALL_AGENTS = "claude";
+      SANDBOX_NO_AUTOUPDATE = 1;
+      SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
     };
   };
 
@@ -70,10 +78,18 @@
   home.sessionPath = [
     # Add macOS-specific PATH entries
     "$HOME/.local/bin"
+    "$HOME/code/scripts"
   ];
 
   home.file.".wgetrc".text = ''
     ca_certificate=/Users/bannach/.certs/zscaler_cert.pem
+  '';
+  # Symlink gitconfig from XDG config home
+  home.file.".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/git/config";
+
+  home.activation.copyGitAllowedSigners = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "$(dirname "${allowedSignersPath}")"
+    install -m 0644 "${allowedSigners}" "${allowedSignersPath}"
   '';
 
   # User information

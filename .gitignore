@@ -20,3 +20,4 @@ darwin-configuration/
 *.nar
 
 home/work.nix
+.DS_STORE

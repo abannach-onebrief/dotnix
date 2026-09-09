@@ -16,6 +16,19 @@
     grep = "grep --color=auto";
     initYarn = "corepack enable && corepack install --global yarn@latest";
   };
+
+  # Common shell functions shared between bash and zsh
+  commonShellFunctions = ''
+    # Fuzzy-select a git worktree and cd into it
+    wt() {
+      local dir
+      dir=$(git worktree list --porcelain |
+        awk '/^worktree / { sub(/^worktree /, ""); print }' |
+        fzf)
+
+      [[ -n "$dir" ]] && cd "$dir"
+    }
+  '';
 in {
   imports = [
     ../modules/neovim.nix
@@ -134,6 +147,7 @@ in {
     bash = {
       enable = true;
       shellAliases = commonShellAliases;
+      initExtra = commonShellFunctions;
       sessionVariables = {
         GOPROXY = "http://localhost:3100,direct";
       };
@@ -150,6 +164,7 @@ in {
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases = commonShellAliases;
+      initContent = commonShellFunctions;
       sessionVariables = {
         GOPROXY = "http://localhost:3100,direct";
       };
